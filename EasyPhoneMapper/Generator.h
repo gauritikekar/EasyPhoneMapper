@@ -3,12 +3,18 @@
 
 namespace Aconex
 {
+	// Forward declaration
+	class CTestGenerator;
+
 	class CGenerator
 	{
+		// Unit testing support
+		friend class CTestGenerator;
+
 	public:
 		CGenerator();
 		~CGenerator();
-		VectorString&& ProcessNumber(const std::string& strNumber);
+		SetString&& ProcessNumber(const std::string& strNumber);
 	protected:
 		virtual bool Validate(const std::string& strNumber);
 

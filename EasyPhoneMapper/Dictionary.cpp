@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Dictionary.h"
 
-using namespace Aconex;
 using namespace std;
+using namespace Aconex;
 
 CDictionary::CDictionary()
 {
@@ -12,19 +12,19 @@ CDictionary::~CDictionary()
 {
 }
 
-CDictionary::CDictionary(const MultiMapStringString& mDictMap)
+CDictionary::CDictionary(const MultiMapStringString& mapDict) : m_mapNumToWordMap(mapDict)
 {
 }
 
-CDictionary* CDictionary::instance = NULL;
+CDictionary* CDictionary::m_sInstance = nullptr;
 
-CDictionary* CDictionary::getInstance()
+CDictionary* CDictionary::GetInstance()
 {
-	if (instance == NULL)
+	if (m_sInstance == NULL)
 	{
-		instance = new CDictionary();
+		m_sInstance = new CDictionary();
 	}
-	return instance;
+	return m_sInstance;
 }
 
 bool CDictionary::Init(const std::string* pDictFile)

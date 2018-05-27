@@ -11,10 +11,10 @@ CGenerator::~CGenerator()
 {
 }
 
-VectorString&& CGenerator::ProcessNumber(const std::string& strNumber)
+SetString&& CGenerator::ProcessNumber(const std::string& strNumber)
 {
-	VectorString vec;
-	return move(vec);
+	SetString setCombinations;
+	return move(setCombinations);
 }
 
 bool CGenerator::Validate(const std::string& strNumber)
