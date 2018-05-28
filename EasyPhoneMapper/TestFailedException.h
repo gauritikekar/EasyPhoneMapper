@@ -1,23 +1,13 @@
 #pragma once
-#include <exception>
-#include <string>
+#include "AconexException.h"
 
 namespace Aconex
 {
-	class CTestFailedException : public std::exception
+	class CTestFailedException : public CAconexException
 	{
 	public:
-		explicit CTestFailedException(const char* message) :m_strMsg(message) {}
+		explicit CTestFailedException(const char* message) :CAconexException(message) {}
 
-		explicit CTestFailedException(const std::string& message) : m_strMsg(message) {}
-
-		virtual ~CTestFailedException() throw() {}
-
-		virtual const char* what() const throw ()
-		{
-			return m_strMsg.c_str();
-		}
-	protected:
-		std::string m_strMsg;
+		explicit CTestFailedException(const std::string& message) : CAconexException(message) {}
 	};
 }

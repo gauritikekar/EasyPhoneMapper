@@ -14,7 +14,7 @@ namespace Aconex
 	public:
 		CGenerator();
 		~CGenerator();
-		SetString&& ProcessNumber(const std::string& strNumber);
+		std::size_t ProcessNumber(const std::string& strNumber, SetString& setOutCombinations);
 	protected:
 		virtual bool Validate(const std::string& strNumber);
 

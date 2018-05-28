@@ -5,6 +5,7 @@
 #include "TestDictionary.h"
 #include "TestGenerator.h"
 #include "TestFailedException.h"
+#include "Dictionary.h"
 
 using namespace std;
 using namespace Aconex;
@@ -20,6 +21,12 @@ int main()
 		return -1;
 #endif // _DEBUG
 
+	// Initialize Dictionary
+	if (!CDictionary::GetInstance())
+	{
+		cout << "Dictionary initialization failed. Out of memory.";
+		return -1;
+	}
 	return 0;
 }
 

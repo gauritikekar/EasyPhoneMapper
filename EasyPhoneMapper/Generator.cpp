@@ -11,10 +11,11 @@ CGenerator::~CGenerator()
 {
 }
 
-SetString&& CGenerator::ProcessNumber(const std::string& strNumber)
+size_t CGenerator::ProcessNumber(const std::string& strNumber, SetString& setOutCombinations)
 {
-	SetString setCombinations;
-	return move(setCombinations);
+	setOutCombinations.clear();
+	// TODO
+	return setOutCombinations.size();
 }
 
 bool CGenerator::Validate(const std::string& strNumber)

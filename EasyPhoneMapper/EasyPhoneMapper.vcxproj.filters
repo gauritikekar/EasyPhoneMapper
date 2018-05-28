@@ -45,6 +45,12 @@
     <ClInclude Include="TestGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AconexException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

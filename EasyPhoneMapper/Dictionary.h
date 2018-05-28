@@ -14,17 +14,24 @@ namespace Aconex
 	public:
 		static CDictionary* GetInstance();
 		~CDictionary();
-		bool Init(const std::string* pDictFile = nullptr);
-		SetString&& GetUniqueKeys();
-		SetString&& GetMatchedEntries(const std::string& strKey);
+		bool Init(std::string* pDictFile = nullptr);
+		std::size_t GetUniqueKeys(SetString& setOutKeys);
+		std::size_t GetMatchedEntries(const std::string& strKey, SetString& setOutMatches);
 
 	private:
-		static CDictionary* m_sInstance;
 		CDictionary(const CDictionary&) = delete;
 		CDictionary& operator=(const CDictionary&) = delete;
 		CDictionary();
 		CDictionary(const MultiMapStringString& mapDictMap);
 
-		MultiMapStringString m_mapNumToWordMap;
+		bool SetAlphaNumericMapping();
+		std::size_t GetWordListFromDictFile(const std::string& strFileName, SetString& setWordList);
+		void SanitizeString(std::string & strWord);
+		void AddWordToDictionary(std::string strWord);
+
+		// Members
+		static CDictionary* m_sInstance;
+		MultiMapStringString m_mapDictionary;
+		MultiMapCharChar m_mapAlphaToNum;
 	};
 }

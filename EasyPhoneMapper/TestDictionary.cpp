@@ -50,7 +50,8 @@ void CTestDictionary::TestMatchedEntries()
 	unsigned short n = 0;
 	for (auto it : arrNumber)
 	{
-		SetString&& setOutMatches = testDict.GetMatchedEntries(it);
+		SetString setOutMatches;
+		testDict.GetMatchedEntries(it, setOutMatches);
 
 		// Check output size matched expectations
 		if (setOutMatches.size() != arrOccurenceCount[n])
@@ -75,7 +76,9 @@ void CTestDictionary::TestUniqueKeys()
 {
 	CDictionary testDict(s_mapDict);
 
-	SetString&& setOutKeys = testDict.GetUniqueKeys();
+	SetString setOutKeys;
+	testDict.GetUniqueKeys(setOutKeys);
+
 	if (setOutKeys.size() != 4)
 		throw CTestFailedException("TestUniqueKeys: Unique count incorrect.");
 }

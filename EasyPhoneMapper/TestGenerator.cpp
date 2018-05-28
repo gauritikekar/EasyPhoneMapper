@@ -52,10 +52,9 @@ void CTestGenerator::TestProcessNumber()
 	unsigned short n = 0;
 	for (auto it : vPhoneNumbers)
 	{
-		SetString&& setOutCombinations = testGen.ProcessNumber(it);
-
 		// Check output size matched expectations
-		if (setOutCombinations.size() != arrCombinationCount[n])
+		SetString setOutCombinations;
+		if (testGen.ProcessNumber(it, setOutCombinations) != arrCombinationCount[n])
 			throw CTestFailedException("TestProcessNumber: Combination count invalid.");
 
 		// Check contents match
