@@ -18,17 +18,6 @@ CDictionary::CDictionary(const MultiMapStringString& mapDict) : m_mapDictionary(
 {
 }
 
-CDictionary* CDictionary::m_sInstance = nullptr;
-
-CDictionary* CDictionary::GetInstance()
-{
-	if (!m_sInstance)
-	{
-		m_sInstance = new CDictionary();
-	}
-	return m_sInstance;
-}
-
 bool CDictionary::Init(std::string* pDictFile/*=nullptr*/)
 {
 	static string dictFile(DICTIONARY_FILE);
@@ -120,29 +109,23 @@ size_t CDictionary::GetWordListFromDictFile(const std::string& strFileName, SetS
 	return setWordList.size();
 }
 
-void CDictionary::AddWordToDictionary(string strWord)
+void CDictionary::AddWordToDictionary(const string& strWord)
 {
-	string strNumKey;
+	// Sanitize the string and make it conform to our requirements.
+	string strWordCopy = Utils::InspectAndSanitizeString(strWord);
 
-	SanitizeString(strWord);
 	// Make a number from a word and adds as a key in a dictionary
-	for (auto itChar : strWord)
+	string strNumKey;
+	for (auto itChar : strWordCopy)
 	{
 		auto itNum = m_mapAlphaToNum.find(itChar);
 		if (itNum != m_mapAlphaToNum.end())
 			strNumKey += itNum->second;
 	}
-	m_mapDictionary.insert(PairStringString(strNumKey, strWord));
-}
-void CDictionary::SanitizeString(std::string & strWord)
-{
-	Utils::Remove(strWord, ' ');
-	Utils::Remove(strWord, '.');
-	Utils::Remove(strWord, '-');
-	Utils::ToUpper(strWord);
+	m_mapDictionary.insert(PairStringString(strNumKey, strWordCopy));
 }
 
-size_t CDictionary::GetUniqueKeys(SetString& setOutKeys)
+size_t CDictionary::GetUniqueKeys(SetString& setOutKeys) const 
 {
 	setOutKeys.clear();
 
@@ -152,11 +135,11 @@ size_t CDictionary::GetUniqueKeys(SetString& setOutKeys)
 	return setOutKeys.size();
 }
 
-size_t CDictionary::GetMatchedEntries(const std::string& strKey, SetString& setOutMatches)
+size_t CDictionary::GetMatchedEntries(const std::string& strKey, SetString& setOutMatches) const
 {
 	setOutMatches.clear();
 
-	MultiMapStringString::_Pairii valueList = m_mapDictionary.equal_range(strKey);
+	const auto valueList = m_mapDictionary.equal_range(strKey);
 	for (auto it = valueList.first; it != valueList.second; ++it)
 		setOutMatches.insert(it->second);
 

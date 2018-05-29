@@ -12,25 +12,21 @@ namespace Aconex
 		friend class CTestDictionary;
 
 	public:
-		static CDictionary* GetInstance();
+		CDictionary();
 		~CDictionary();
 		bool Init(std::string* pDictFile = nullptr);
-		std::size_t GetUniqueKeys(SetString& setOutKeys);
-		std::size_t GetMatchedEntries(const std::string& strKey, SetString& setOutMatches);
+		std::size_t GetUniqueKeys(SetString& setOutKeys) const;
+		std::size_t GetMatchedEntries(const std::string& strKey, SetString& setOutMatches) const;
 
 	private:
-		CDictionary(const CDictionary&) = delete;
-		CDictionary& operator=(const CDictionary&) = delete;
-		CDictionary();
 		CDictionary(const MultiMapStringString& mapDictMap);
 
 		bool SetAlphaNumericMapping();
 		std::size_t GetWordListFromDictFile(const std::string& strFileName, SetString& setWordList);
 		void SanitizeString(std::string & strWord);
-		void AddWordToDictionary(std::string strWord);
+		void AddWordToDictionary(const std::string& strWord);
 
 		// Members
-		static CDictionary* m_sInstance;
 		MultiMapStringString m_mapDictionary;
 		MultiMapCharChar m_mapAlphaToNum;
 	};

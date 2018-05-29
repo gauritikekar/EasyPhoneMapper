@@ -8,6 +8,8 @@
 
 #define ALPHA_NUMERIC_FILE		"alphanum.txt"
 #define DICTIONARY_FILE			"dictionary.txt"
+#define MAX_CONSECUTIVE_DIGITS	(1)
+#define CHAR_SEPARATOR			"-"
 
 namespace Aconex
 {

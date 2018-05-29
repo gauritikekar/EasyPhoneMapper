@@ -9,13 +9,15 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{d567346a-bd27-4d5e-b64b-405407be2485}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <Filter Include="Tests\Source Files">
+      <UniqueIdentifier>{375eaa10-71a5-471b-888b-e3e74a0f18b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Header Files">
+      <UniqueIdentifier>{07095dbd-0030-4e72-8134-6c452cf94c08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -36,20 +38,20 @@
     <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TestDictionary.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TestFailedException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TestGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AconexException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FileException.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\TestDictionary.h">
+      <Filter>Tests\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\TestFailedException.h">
+      <Filter>Tests\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\TestGenerator.h">
+      <Filter>Tests\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,11 +70,11 @@
     <ClCompile Include="Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestDictionary.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Tests\TestDictionary.cpp">
+      <Filter>Tests\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestGenerator.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Tests\TestGenerator.cpp">
+      <Filter>Tests\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

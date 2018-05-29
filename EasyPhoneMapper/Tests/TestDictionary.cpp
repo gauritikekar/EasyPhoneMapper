@@ -40,8 +40,8 @@ void CTestDictionary::TestMatchedEntries()
 	unsigned short arrOccurenceCount[] = { 1,2,0 };
 	SetString setMatches[] =
 	{
-		{"CAR"},
-		{"BAT","CAT"},
+		{ "CAR" },
+		{ "BAT","CAT" },
 		{}
 	};
 

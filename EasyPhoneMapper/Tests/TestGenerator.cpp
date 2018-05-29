@@ -2,6 +2,7 @@
 #include "TestGenerator.h"
 #include "Generator.h"
 #include "TestFailedException.h"
+#include "Dictionary.h"
 
 using namespace std;
 using namespace Aconex;
@@ -29,32 +30,36 @@ void CTestGenerator::TestProcessNumber()
 {
 	VectorString vPhoneNumbers =
 	{
-		"1228 9227",
-		"1228.922",
-		"228-922",
-		"227",
-		"96753"
+	"1228 9227",
+	"1228.922",
+	"228-922",
+	"227",
+	"96753"
 	};
 
-	short arrCombinationCount[] = { 2,0,0,1,0 };
+	short arrCombinationCount[] = { 2,0,0,1,1 };
 
 	SetString setCombinations[] =
 	{
-		{"1-CAT-9-CAR","1-BAT-9-CAR"},
+		{ "1-CAT-9-CAR","1-BAT-9-CAR" },
 		{},
 		{},
-		{"CAR"},
-		{}
+		{ "CAR" },
+		{ "WORLD" }
 	};
 
-	CGenerator testGen;
+	// Init test dict
+	CDictionary dict;
+	dict.Init();
+
+	CGenerator testGen(dict);
 
 	unsigned short n = 0;
-	for (auto it : vPhoneNumbers)
+	for (auto itNum : vPhoneNumbers)
 	{
 		// Check output size matched expectations
 		SetString setOutCombinations;
-		if (testGen.ProcessNumber(it, setOutCombinations) != arrCombinationCount[n])
+		if (testGen.ProcessNumber(itNum, setOutCombinations) != arrCombinationCount[n])
 			throw CTestFailedException("TestProcessNumber: Combination count invalid.");
 
 		// Check contents match
@@ -85,7 +90,11 @@ void CTestGenerator::TestValidate()
 
 	bool bValidatedVal[] = { true, false, false, true, false };
 
-	CGenerator testGen;
+	// Init test dict
+	CDictionary dict;
+	dict.Init();
+
+	CGenerator testGen(dict);
 
 	unsigned short n = 0;
 	for (auto it : vPhoneNumbers)
