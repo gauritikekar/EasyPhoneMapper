@@ -3,13 +3,13 @@
 #include "Generator.h"
 #include "TestFailedException.h"
 #include "Dictionary.h"
+#include "TestData.h"
 
 using namespace std;
 using namespace Aconex;
 
 CTestGenerator::CTestGenerator()
 {
-
 }
 
 CTestGenerator::~CTestGenerator()
@@ -49,10 +49,9 @@ void CTestGenerator::TestProcessNumber()
 	};
 
 	// Init test dict
-	CDictionary dict;
-	dict.Init();
+	CDictionary testDict(TestData::s_mapDict, TestData::s_mapAlphaNumeric);
 
-	CGenerator testGen(dict);
+	CGenerator testGen(testDict);
 
 	unsigned short n = 0;
 	for (auto itNum : vPhoneNumbers)
@@ -91,10 +90,9 @@ void CTestGenerator::TestValidate()
 	bool bValidatedVal[] = { true, false, false, true, false };
 
 	// Init test dict
-	CDictionary dict;
-	dict.Init();
+	CDictionary testDict(TestData::s_mapDict, TestData::s_mapAlphaNumeric);
 
-	CGenerator testGen(dict);
+	CGenerator testGen(testDict);
 
 	unsigned short n = 0;
 	for (auto it : vPhoneNumbers)

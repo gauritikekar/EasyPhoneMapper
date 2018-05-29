@@ -14,43 +14,43 @@ CDictionary::~CDictionary()
 {
 }
 
-CDictionary::CDictionary(const MultiMapStringString& mapDict) : m_mapDictionary(mapDict)
+CDictionary::CDictionary(const MultiMapStringString& mapDict, const MultiMapCharChar& mapAlphaToNum)
+	: m_mapDictionary(mapDict),
+	m_mapAlphaToNum(mapAlphaToNum)
 {
 }
 
-bool CDictionary::Init(std::string* pDictFile/*=nullptr*/)
+/*
+Initialize the dictionary. Try loading the Alpha numeric data into memory.
+*/
+bool CDictionary::Init(const string& strDictFile, const string& strAlphaFile)
 {
-	static string dictFile(DICTIONARY_FILE);
-
 	bool bRetVal = false;
-	if (SetAlphaNumericMapping())
+	try
 	{
-		// If parameter is null then load default dictionary
-		if (!pDictFile)
-			pDictFile = &dictFile;
-
-		SetString setWordList;
-		try
+		if (SetAlphaNumericMapping(strAlphaFile))
 		{
-			GetWordListFromDictFile(*pDictFile, setWordList);
+			SetString setWordList;
+			GetWordListFromDictFile(strDictFile, setWordList);
 
 			for (auto it : setWordList)
 				AddWordToDictionary(it);
 
 			bRetVal = true;
 		}
-		catch (CFileException ex)
-		{
-			cout << "Init failed. " << ex.what();
-		}
 	}
+	catch (CFileException ex)
+	{
+		cout << "Init failed. " << ex.what();
+	}
+
 	return bRetVal;
 }
 
 /*
 This function sets AlphaNmeric Map which has alphabets as keys and numbers as its values
  */
-bool CDictionary::SetAlphaNumericMapping()
+bool CDictionary::SetAlphaNumericMapping(const std::string& strAlphaFile)
 {
 	bool bRetVal = false;
 	ifstream inFile(ALPHA_NUMERIC_FILE, ifstream::in);
@@ -77,13 +77,16 @@ bool CDictionary::SetAlphaNumericMapping()
 	}
 	else
 	{
-		string strMessage = "Error opening file: " + string(ALPHA_NUMERIC_FILE);
+		string strMessage = "Error opening file: " + strAlphaFile;
 		throw CFileException(strMessage);
 	}
 
 	return bRetVal;
 }
 
+/*
+Read a dict file to load the word list
+*/
 size_t CDictionary::GetWordListFromDictFile(const std::string& strFileName, SetString& setWordList)
 {
 	ifstream inFile(strFileName, ifstream::in);
@@ -109,6 +112,10 @@ size_t CDictionary::GetWordListFromDictFile(const std::string& strFileName, SetS
 	return setWordList.size();
 }
 
+/*
+Add a given word to the dictionary. Generate key for the given word
+based on number map and then insert it into the map.
+*/
 void CDictionary::AddWordToDictionary(const string& strWord)
 {
 	// Sanitize the string and make it conform to our requirements.
@@ -125,7 +132,10 @@ void CDictionary::AddWordToDictionary(const string& strWord)
 	m_mapDictionary.insert(PairStringString(strNumKey, strWordCopy));
 }
 
-size_t CDictionary::GetUniqueKeys(SetString& setOutKeys) const 
+/*
+Return list of unique keys. Since a multi-map is used, returning a unique
+set allows easier iteration on a unique set.*/
+size_t CDictionary::GetUniqueKeys(SetString& setOutKeys) const
 {
 	setOutKeys.clear();
 
@@ -135,6 +145,9 @@ size_t CDictionary::GetUniqueKeys(SetString& setOutKeys) const
 	return setOutKeys.size();
 }
 
+/*
+Return the list of values that occur for a given key.
+*/
 size_t CDictionary::GetMatchedEntries(const std::string& strKey, SetString& setOutMatches) const
 {
 	setOutMatches.clear();

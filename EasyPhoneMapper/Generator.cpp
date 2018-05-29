@@ -15,6 +15,9 @@ CGenerator::~CGenerator()
 {
 }
 
+/*
+Process the given number and return combinations that exist in dictionary.
+*/
 size_t CGenerator::ProcessNumber(const string& strNumber, SetString& setOutCombinations)
 {
 	setOutCombinations.clear();
@@ -36,6 +39,9 @@ size_t CGenerator::ProcessNumber(const string& strNumber, SetString& setOutCombi
 	return setOutCombinations.size();
 }
 
+/*
+Process the given number and return possible acceptable combinations for it.
+*/
 std::size_t CGenerator::GeneratePossibleWords(const std::string& strNumber, SetString& setOutCombinations)
 {
 	// Push the provided number into the reference word list container.
@@ -49,6 +55,7 @@ std::size_t CGenerator::GeneratePossibleWords(const std::string& strNumber, SetS
 
 	// Loop till there are no more replacements to be made.
 	VectorString tempContainer;
+	static string chSeparator(1, CHAR_SEPARATOR);
 	while (1)
 	{
 		bool bFound = false;
@@ -73,12 +80,12 @@ std::size_t CGenerator::GeneratePossibleWords(const std::string& strNumber, SetS
 
 						size_t iRight = itKey.size() + iPos;
 						if (iPos > 0)
-							tempStr = vWordList[i].substr(0, iPos) + CHAR_SEPARATOR;
+							tempStr = vWordList[i].substr(0, iPos) + chSeparator;
 
 						tempStr += itVal;
 
-						if (iRight < vWordList[i].size() - 1)
-							tempStr += CHAR_SEPARATOR + vWordList[i].substr(iRight, vWordList[i].size() - iRight);
+						if (iRight < vWordList[i].size())
+							tempStr += chSeparator + vWordList[i].substr(iRight, vWordList[i].size() - iRight);
 
 						tempContainer.push_back(tempStr);
 					}
@@ -91,8 +98,15 @@ std::size_t CGenerator::GeneratePossibleWords(const std::string& strNumber, SetS
 		vWordList = tempContainer;
 		tempContainer.clear();
 
+		string chTwiceSeparator = chSeparator + chSeparator;
 		for (auto it : vWordList)
+		{
+			// Trim double inserts of '-' in the logic above.
+			for (size_t i = 0; (i = it.find(chTwiceSeparator, i)) != std::string::npos; i += chSeparator.size())
+				it.replace(i, chTwiceSeparator.size(), chSeparator);
+
 			setOutCombinations.insert(it);
+		}
 
 		if (!bFound)
 			break;
@@ -125,4 +139,3 @@ bool CGenerator::Validate(const std::string& strNumber)
 	}
 	return bRet;
 }
-

@@ -2,18 +2,10 @@
 #include "TestDictionary.h"
 #include "Dictionary.h"
 #include "TestFailedException.h"
+#include "TestData.h"
 
 using namespace std;
 using namespace Aconex;
-
-static MultiMapStringString s_mapDict =
-{
-	{ "227", "CAR" },
-	{ "96753", "WORLD" },
-	{ "228", "BAT" },
-	{ "228", "CAT" },
-	{ "732", "SEA" }
-};
 
 CTestDictionary::CTestDictionary()
 {
@@ -45,7 +37,7 @@ void CTestDictionary::TestMatchedEntries()
 		{}
 	};
 
-	CDictionary testDict(s_mapDict);
+	CDictionary testDict(TestData::s_mapDict, TestData::s_mapAlphaNumeric);
 
 	unsigned short n = 0;
 	for (auto it : arrNumber)
@@ -74,7 +66,7 @@ check all valid unique keys in a map
 */
 void CTestDictionary::TestUniqueKeys()
 {
-	CDictionary testDict(s_mapDict);
+	CDictionary testDict(TestData::s_mapDict, TestData::s_mapAlphaNumeric);
 
 	SetString setOutKeys;
 	testDict.GetUniqueKeys(setOutKeys);

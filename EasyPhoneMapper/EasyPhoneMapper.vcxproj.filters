@@ -53,6 +53,12 @@
     <ClInclude Include="Tests\TestGenerator.h">
       <Filter>Tests\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Tests\TestData.h">
+      <Filter>Tests\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyPhoneMapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -75,6 +81,12 @@
     </ClCompile>
     <ClCompile Include="Tests\TestGenerator.cpp">
       <Filter>Tests\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\TestData.cpp">
+      <Filter>Tests\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
