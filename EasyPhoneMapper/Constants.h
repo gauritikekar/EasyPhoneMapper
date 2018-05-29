@@ -6,8 +6,8 @@
 #include <string>
 #include <algorithm>
 
-#define ALPHA_NUMERIC_FILE		"alphanum.txt"
-#define DICTIONARY_FILE			"dictionary.txt"
+#define ALPHA_NUMERIC_FILE		".\\Data\\alphanum.txt"
+#define DICTIONARY_FILE			".\\Data\\dictionary.txt"
 #define MAX_CONSECUTIVE_DIGITS	(1)
 #define CHAR_SEPARATOR			"-"
 

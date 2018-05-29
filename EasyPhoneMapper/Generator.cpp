@@ -48,9 +48,9 @@ std::size_t CGenerator::GeneratePossibleWords(const std::string& strNumber, SetS
 	m_rDict.GetUniqueKeys(setUniqueKeys);
 
 	// Loop till there are no more replacements to be made.
+	VectorString tempContainer;
 	while (1)
 	{
-		VectorString tempContainer;
 		bool bFound = false;
 		int i = 0;
 		for (auto itWrd : vWordList)
@@ -89,6 +89,7 @@ std::size_t CGenerator::GeneratePossibleWords(const std::string& strNumber, SetS
 
 		// Store the accumulated list into the reference container
 		vWordList = tempContainer;
+		tempContainer.clear();
 
 		for (auto it : vWordList)
 			setOutCombinations.insert(it);
