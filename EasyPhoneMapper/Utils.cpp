@@ -42,6 +42,6 @@ void Aconex::Utils::RemoveChar(string& strWord, const string& strChars)
 
 void Aconex::Utils::ToUpper(std::string& strWord)
 {
-	for (auto it : strWord)
-		toupper(it);
+	for (size_t i = 0; i<strWord.size(); i++)
+		strWord[i] = toupper(strWord[i]);
 }
