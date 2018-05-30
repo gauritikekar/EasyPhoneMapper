@@ -28,12 +28,15 @@ all valid matched entries for the given key.
 */
 void CTestDictionary::TestMatchedEntries()
 {
-	string arrNumber[] = { "227","228","7324" };
-	unsigned short arrOccurenceCount[] = { 1,2,0 };
+	string arrNumber[] = { "227","228","7324", "96753", "3283", "245"};
+	unsigned short arrOccurenceCount[] = { 1,2,0,1,2,0 };
 	SetString setMatches[] =
 	{
 		{ "CAR" },
 		{ "BAT","CAT" },
+		{},
+		{ "WORLD" },
+		{ "DATE","FATE" },
 		{}
 	};
 
@@ -71,6 +74,6 @@ void CTestDictionary::TestUniqueKeys()
 	SetString setOutKeys;
 	testDict.GetUniqueKeys(setOutKeys);
 
-	if (setOutKeys.size() != 4)
+	if (setOutKeys.size() != 10)
 		throw CTestFailedException("TestUniqueKeys: Unique count incorrect.");
 }

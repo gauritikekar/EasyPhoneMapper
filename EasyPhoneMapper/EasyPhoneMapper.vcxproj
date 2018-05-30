@@ -74,6 +74,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -107,6 +109,12 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <CustomBuildStep>
+      <Command>xcopy /Y $(ProjectDir)Data\*.*  $(SolutionDir)Bin\$(Configuration)\Data
+xcopy /Y $(SolutionDir)$(IntDir)*.exe  $(SolutionDir)Bin\$(Configuration)</Command>
+      <TreatOutputAsContent>true</TreatOutputAsContent>
+      <Outputs>Now configuring Bin\Debug folder...</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -142,6 +150,12 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <CustomBuildStep>
+      <Command>xcopy /Y $(ProjectDir)Data\*.*  $(SolutionDir)Bin\$(Configuration)\Data
+xcopy /Y $(SolutionDir)$(IntDir)*.exe  $(SolutionDir)Bin\$(Configuration)</Command>
+      <Outputs>Now configuring Bin\Release folder...</Outputs>
+      <TreatOutputAsContent>true</TreatOutputAsContent>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AconexException.h" />

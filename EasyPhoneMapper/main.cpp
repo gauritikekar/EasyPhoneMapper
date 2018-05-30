@@ -29,6 +29,9 @@ int main(int argc, char* argv[])
 	return obMapper.ProcessInput();
 }
 
+/*
+Function to run unit test cases
+*/
 bool RunTests()
 {
 	bool bRet = true;

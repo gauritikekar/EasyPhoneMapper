@@ -8,10 +8,18 @@ using namespace Aconex;
 MultiMapStringString TestData::s_mapDict =
 {
 	{ "227", "CAR" },
+	{ "2277", "CARS" },
 	{ "96753", "WORLD" },
 	{ "228", "BAT" },
 	{ "228", "CAT" },
-	{ "732", "SEA" }
+	{ "732", "SEA" },
+	{ "732", "PEA" },
+	{ "538837", "LETTER" },
+	{ "966", "ZOO" },
+	{ "3283", "DATE" },
+	{ "3283", "FATE" },
+	{ "3678863", "FORTUNE" },
+	{ "7678", "POST" }
 };
 
 // Map of a set of characters to a number
