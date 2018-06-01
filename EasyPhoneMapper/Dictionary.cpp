@@ -69,7 +69,7 @@ bool CDictionary::SetAlphaNumericMapping(const std::string& strAlphaFile)
 				VectorString vChars;
 				Utils::Tokenize(vTokens[1], ',', vChars);
 				for (auto it : vChars)
-					m_mapAlphaToNum.insert(PairCharChar(toupper(it.at(0)), vTokens[0].at(0)));
+					m_mapAlphaToNum.insert(PairCharChar(toupper(it[0]), vTokens[0][0]));
 			}
 		}
 
@@ -98,7 +98,8 @@ size_t CDictionary::GetWordListFromDictFile(const std::string& strFileName, SetS
 		{
 			string strWord;
 			getline(inFile, strWord);
-			setWordList.insert(strWord);
+			if (!strWord.empty())
+				setWordList.insert(strWord);
 		}
 
 		inFile.close();
@@ -128,6 +129,11 @@ void CDictionary::AddWordToDictionary(const string& strWord)
 		auto itNum = m_mapAlphaToNum.find(itChar);
 		if (itNum != m_mapAlphaToNum.end())
 			strNumKey += itNum->second;
+		else
+		{
+			// If no matching number found, this is an invalid word. Return.
+			return;
+		}
 	}
 	m_mapDictionary.insert(PairStringString(strNumKey, strWordCopy));
 }

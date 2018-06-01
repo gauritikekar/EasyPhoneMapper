@@ -42,7 +42,7 @@ The function names and variables are self-explanatory and as such the code is no
 
 Functionally, there are 3 main classes: *CDictionary*, *CGenerator* and *CEasyPhoneMapper*
 
-*CDictionary* stores the dictionary contents inside a multi-map. So 227 as a key may map to CAT or BAT. It also stores the map to translate the character to a number to assist with the former operation.
+*CDictionary* stores the dictionary contents inside a multi-map. So 227 as a key, may map to CAT or BAT. It also stores the map to translate the character to a number to assist with the former operation.
 
 *CGenerator* is the heart of the program and employs an iterative logic to produce the phone number combinations. I've experimented with iterative over recursive for a change. Changing the logic to be a recursive one is very much possible without impacting other sections of the code.
 
@@ -50,7 +50,7 @@ Functionally, there are 3 main classes: *CDictionary*, *CGenerator* and *CEasyPh
 
 #### Processing specifics
 
-* The input phone number if first sanitized to remove any space or punctuation characters viz. ;:.",'!?[]()-\{}/
+* The input phone number is first sanitized to remove any space or punctuation characters viz. ;:.",'!?[]()-\{}/
 * The generated combination is valid only if there are not more than two consecutive characters digits (post replace).
 * The output will contain all capital characters separated with a hyphen (-) at word boundaries.
 

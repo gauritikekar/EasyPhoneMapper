@@ -1,18 +1,15 @@
 #include "stdafx.h"
 #include "Utils.h"
-
+#include <sstream>
 using namespace std;
 
 size_t Aconex::Utils::Tokenize(string strInput, char chDelim, VectorString& vTokens)
 {
 	vTokens.clear();
-	char* chNextToken = nullptr;
-	char *chToken = strtok_s((char*)strInput.c_str(), &chDelim, &chNextToken);
-	while (chToken)
-	{
-		vTokens.push_back(chToken);
-		chToken = strtok_s(NULL, &chDelim, &chNextToken);
-	}
+	istringstream iss(strInput);
+	string c;
+	while (getline(iss, c, chDelim))
+		vTokens.push_back(c);
 	return vTokens.size();
 }
 

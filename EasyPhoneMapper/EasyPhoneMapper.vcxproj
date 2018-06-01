@@ -110,11 +110,20 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <CustomBuildStep>
+      <Command>
+      </Command>
+      <TreatOutputAsContent>
+      </TreatOutputAsContent>
+      <Outputs>
+      </Outputs>
+    </CustomBuildStep>
+    <PostBuildEvent>
       <Command>xcopy /Y $(ProjectDir)Data\*.*  $(SolutionDir)Bin\$(Configuration)\Data
 xcopy /Y $(SolutionDir)$(IntDir)*.exe  $(SolutionDir)Bin\$(Configuration)</Command>
-      <TreatOutputAsContent>true</TreatOutputAsContent>
-      <Outputs>Now configuring Bin\Debug folder...</Outputs>
-    </CustomBuildStep>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Preparing Bin\Debug out folder...</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -153,9 +162,15 @@ xcopy /Y $(SolutionDir)$(IntDir)*.exe  $(SolutionDir)Bin\$(Configuration)</Comma
     <CustomBuildStep>
       <Command>xcopy /Y $(ProjectDir)Data\*.*  $(SolutionDir)Bin\$(Configuration)\Data
 xcopy /Y $(SolutionDir)$(IntDir)*.exe  $(SolutionDir)Bin\$(Configuration)</Command>
-      <Outputs>Now configuring Bin\Release folder...</Outputs>
+      <Outputs>
+      </Outputs>
       <TreatOutputAsContent>true</TreatOutputAsContent>
     </CustomBuildStep>
+    <PostBuildEvent>
+      <Message>Preparing Bin\Release out folder...</Message>
+      <Command>xcopy /Y $(ProjectDir)Data\*.*  $(SolutionDir)Bin\$(Configuration)\Data
+xcopy /Y $(SolutionDir)$(IntDir)*.exe  $(SolutionDir)Bin\$(Configuration)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AconexException.h" />

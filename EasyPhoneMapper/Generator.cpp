@@ -32,7 +32,7 @@ size_t CGenerator::ProcessNumber(const string& strNumber, SetString& setOutCombi
 	for (auto it = setOutCombinations.begin(); it != setOutCombinations.end();)
 	{
 		if (!Validate(*it))
-			setOutCombinations.erase(it++);
+			it = setOutCombinations.erase(it);
 		else
 			it++;
 	}
@@ -45,8 +45,8 @@ Process the given number and return possible acceptable combinations for it.
 std::size_t CGenerator::GeneratePossibleWords(const std::string& strNumber, SetString& setOutCombinations)
 {
 	// Push the provided number into the reference word list container.
-	VectorString vWordList;
-	vWordList.push_back(strNumber);
+	SetString vWordList;
+	vWordList.insert(strNumber);
 
 	// Get the unique set of lookup keys. This is required since we hold
 	// the keys in a multimap.
@@ -54,7 +54,7 @@ std::size_t CGenerator::GeneratePossibleWords(const std::string& strNumber, SetS
 	m_rDict.GetUniqueKeys(setUniqueKeys);
 
 	// Loop till there are no more replacements to be made.
-	VectorString tempContainer;
+	SetString tempContainer;
 	static string chSeparator(1, CHAR_SEPARATOR);
 	while (1)
 	{
@@ -80,18 +80,17 @@ std::size_t CGenerator::GeneratePossibleWords(const std::string& strNumber, SetS
 
 						size_t iRight = itKey.size() + iPos;
 						if (iPos > 0)
-							tempStr = vWordList[i].substr(0, iPos) + chSeparator;
+							tempStr = itWrd.substr(0, iPos) + chSeparator;
 
 						tempStr += itVal;
 
-						if (iRight < vWordList[i].size())
-							tempStr += chSeparator + vWordList[i].substr(iRight, vWordList[i].size() - iRight);
+						if (iRight < itWrd.size())
+							tempStr += chSeparator + itWrd.substr(iRight, itWrd.size() - iRight);
 
-						tempContainer.push_back(tempStr);
+						tempContainer.insert(tempStr);
 					}
 				}
 			}
-			i++;
 		}
 
 		// Store the accumulated list into the reference container
